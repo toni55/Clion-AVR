@@ -19,7 +19,7 @@ SET(PORT usb)		         	# <-- USB bzw. Schnittstelle z.B. /dev/cu.usbserial....
 # SET(BAUD 57600)	        	# <-- Übertragungsrate
 
 SET(EEPROM NO)	     	        	# <-- soll eine x.eep Datei erstellt werden?
-SET(FLUSH NO)		        	# <-- soll Geflusht werden?
+SET(FLASH NO)		        	# <-- soll Geflasht werden?
 
 #============================================================================================
 
@@ -49,6 +49,6 @@ endif(EEPROM)
 
 ADD_CUSTOM_COMMAND(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${AVRBIN}/${AVRSIZE} --target=ihex ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_PROJECT_NAME}.hex)
 
-if(FLUSH)
+if(FLASH)
     ADD_CUSTOM_COMMAND(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${AVRBIN}/${AVRDUDE} -p${DEVICE} -c${PROGRAMMER} -P${PORT} -b${BAUD} -U flash:w:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_PROJECT_NAME}.hex)
-endif(FLUSH)
+endif(FLASH)
