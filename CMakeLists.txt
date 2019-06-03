@@ -2,12 +2,12 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.4)
 SET(CMAKE_SYSTEM_NAME Generic)
 
 #============================================================================================
-PROJECT(AVR)		  		# <-- Prjektname
+PROJECT(AVR)		  		# <-- Project Name
 
-SET(FILES main.c)		  	# <-- Quelldatei(en)
+SET(FILES main.c)		  	# <-- Source file(s)
 
 SET(DEVICE atmega328p)			# <-- MCU
-SET(FREQ 16000000)			# <-- MCU-Frequenz
+SET(FREQ 16000000)			# <-- MCU-Frequency
 
 SET(AVRBIN /opt/local/bin)		# <-- Toolchain
 SET(AVROBJCOPY avr-objcopy)		# <--     ""
@@ -15,11 +15,11 @@ SET(AVRSIZE avr-size)			# <--     ""
 SET(AVRDUDE avrdude)			# <--     ""
 
 SET(PROGRAMMER avrispmkii)		# <-- Programmertype			
-SET(PORT usb)		         	# <-- USB bzw. Schnittstelle z.B. /dev/cu.usbserial....
-# SET(BAUD 57600)	        	# <-- Übertragungsrate
+SET(PORT usb)		         	# <-- USB or interface eg. /dev/cu.usbserial....
+# SET(BAUD 57600)	        	# <-- Transfer rate
 
-SET(EEPROM NO)	     	        	# <-- soll eine x.eep Datei erstellt werden?
-SET(FLASH NO)		        	# <-- soll Geflasht werden?
+SET(EEPROM NO)	     	        	# <-- should an x.eep file be created?
+SET(FLASH NO)		        	# <-- should be flashed?
 
 #============================================================================================
 
