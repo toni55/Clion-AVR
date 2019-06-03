@@ -2,12 +2,12 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.4)
 SET(CMAKE_SYSTEM_NAME Generic)
 
 #============================================================================================
-PROJECT(AVR)		  		# <-- Prjektname
+PROJECT(AVR)		  		# <-- Project Name
 
-SET(FILES main.c)		  	# <-- Quelldatei(en)
+SET(FILES main.c)		  	# <-- Source file(s)
 
 SET(DEVICE atmega328p)			# <-- MCU
-SET(FREQ 16000000)			# <-- MCU-Frequenz
+SET(FREQ 16000000)			# <-- MCU-Frequency
 
 SET(AVRBIN /opt/local/bin)		# <-- Toolchain
 SET(AVROBJCOPY avr-objcopy)		# <--     ""
@@ -15,11 +15,11 @@ SET(AVRSIZE avr-size)			# <--     ""
 SET(AVRDUDE avrdude)			# <--     ""
 
 SET(PROGRAMMER avrispmkii)		# <-- Programmertype			
-SET(PORT usb)		         	# <-- USB bzw. Schnittstelle z.B. /dev/cu.usbserial....
-# SET(BAUD 57600)	        	# <-- Übertragungsrate
+SET(PORT usb)		         	# <-- USB or interface eg. /dev/cu.usbserial....
+# SET(BAUD 57600)	        	# <-- Transfer rate
 
-SET(EEPROM NO)	     	        	# <-- soll eine x.eep Datei erstellt werden?
-SET(FLASH NO)		        	# <-- soll Geflasht werden?
+SET(EEPROM NO)	     	        	# <-- should an x.eep file be created?
+SET(FLASH NO)		        	# <-- should be flashed?
 
 #============================================================================================
 
@@ -57,3 +57,9 @@ ADD_CUSTOM_COMMAND(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${AVRBIN}/${A
 if(FLASH)
     ADD_CUSTOM_COMMAND(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD COMMAND ${AVRBIN}/${AVRDUDE} -p${DEVICE} -c${PROGRAMMER} -P${PORT} -b${BAUD} -U flash:w:${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${CMAKE_PROJECT_NAME}.hex)
 endif(FLASH)
+
+## Fix for avr-gcc: error: unrecognized command line option ‘-rdynamic’
+set(CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "")
+set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "")
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
